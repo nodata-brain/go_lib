@@ -11,9 +11,14 @@ import (
 func GetPage(url string) []string {
 	doc, _ := goquery.NewDocument(url)
 	var text []string
-	a := doc.Find("* > section#contentsArea")
+	html := doc.Find("* > section#contentsArea > div.scoreBox")
+	html.Each(func(index int, s *goquery.Selection) {
 
-	fmt.Println(a.Find("div.scoreBox").Text())
+		fmt.Println(index)
+		fmt.Println(s)
+	})
+
+	fmt.Println(html)
 	text = []string{"tes"}
 
 	return text
@@ -24,7 +29,7 @@ func baseball() []string {
 
 	t := time.Now()
 	fmt.Println(t)
-	url := "https://www.nikkansports.com/baseball/professional/score/2019/pf-score-20190624.html"
+	url := "https://www.nikkansports.com/baseball/professional/score/2019/pf-score-20190626.html"
 	result := GetPage(url)
 
 	return result
